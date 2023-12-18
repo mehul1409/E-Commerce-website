@@ -3,6 +3,7 @@ import "./navbar.css";
 import { CiShoppingCart } from "react-icons/ci";
 import { CiUser } from "react-icons/ci";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,10 +33,13 @@ const Navbar = () => {
             className={`navbar-items ${isMobileMenuOpen ? "mobilemenu" : ""}`}
           >
             <a href="#home" onClick={closeMobileMenu}>
-              HOME
+              <Link to='/'>HOME</Link>
+            </a>
+            <a href="#home" onClick={closeMobileMenu}>
+            <Link to='/product'>PRODUCT</Link>
             </a>
             <a href="#contactus" onClick={closeMobileMenu}>
-              CONTACT
+            <Link to='/contact'>CONTACT</Link>
             </a>
 
             {isAuthenticated && (
