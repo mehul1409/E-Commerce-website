@@ -3,9 +3,10 @@ import Productdetail from "./productdetail";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaRegEye } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
+import { RxCross2 } from "react-icons/rx";
 import "./product.css";
 
-const Product = () => {
+const Product = ({ detail, view, close, setclose }) => {
   const [products, setProducts] = useState(Productdetail);
 
   const filterProducts = (productCategory) => {
@@ -22,12 +23,36 @@ const Product = () => {
 
   return (
     <>
+      {close ? (
+        <div className="productdetailpage">
+          <div className="detailcontainer">
+            <button className="crossbutton" onClick={() => setclose(false)}>
+              <RxCross2 />
+            </button>
+            {detail.map((x) => {
+              return (
+                <div className="productbox">
+                  <div className="productimagebox">
+                    <img src={x.img} alt={x.Title}></img>
+                  </div>
+                  <div className="detailproject">
+                    <h4>{x.cat}</h4>
+                    <h3>{x.Title}</h3>
+                    <h3>{x.price}</h3>
+                    <button>Add to cart</button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
       <div className="products">
-        <h3>Products</h3>
+        <h3 className="productsectionheading">Products</h3>
         <div className="container">
           <div className="filter">
             <div className="categories">
-              <h3>Categories</h3>
+              <h3 className="productsectionheading">Categories</h3>
               <ul>
                 <li onClick={() => showAllProducts()}>All products</li>
                 <li onClick={() => filterProducts("earbuds")}>Earbuds</li>
@@ -51,7 +76,7 @@ const Product = () => {
                           <li>
                             <FiShoppingCart />
                           </li>
-                          <li>
+                          <li onClick={() => view(product)}>
                             <FaRegEye />
                           </li>
                           <li>
