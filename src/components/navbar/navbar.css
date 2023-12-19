@@ -43,8 +43,8 @@
     align-items: center;
 }
 
-.cartlogo , .user-icon{
-    font-size: 1.6rem;
+.cartbutton , .user-icon{
+    font-size: 1.6rem !important;
 }
 
 .navbar-items {

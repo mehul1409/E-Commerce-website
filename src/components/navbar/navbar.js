@@ -78,7 +78,9 @@ const Navbar = () => {
             </a>
             <a href="#cart" className="cart" onClick={closeMobileMenu}>
               <div className="cartlogo">
-                <CiShoppingCart />
+                <Link to='/cart' className="cartbutton">
+                  <CiShoppingCart />
+                  </Link>
               </div>
             </a>
           </div>

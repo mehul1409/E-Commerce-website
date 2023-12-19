@@ -6,7 +6,7 @@ import { FaRegEye } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { Link } from "react-router-dom";
 
-const Homepage = () => {
+const Homepage = ({addtocart , view}) => {
   return (
     <>
       <div className="topbanner">
@@ -81,15 +81,15 @@ const Homepage = () => {
                 <div className="img_box">
                   <img src={eachele.img} alt={eachele.Title}></img>
                   <div className="icon">
-                    <li><FiShoppingCart /></li>
-                    <li><FaRegEye /></li>
+                    <li onClick={() => addtocart(eachele)}><FiShoppingCart /></li>
+                    <li onClick={() => view(eachele)}><FaRegEye /></li>
                     <li><CiHeart /></li>
                   </div>
                 </div>
                 <div className="details">
                     <p>{eachele.cat}</p>
                     <h3>{eachele.Title}</h3>
-                    <h4>{eachele.price}</h4>
+                    <h4>${eachele.price}</h4>
                 </div>
               </div>
             );

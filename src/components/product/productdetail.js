@@ -11,7 +11,7 @@ const Productdetail =
         id:2,
         Title:"Galaxy Tab S6 Lite 10.4-inch Android Tablet 128GB",
         cat: "earbuds",
-        price:`$ 254`,
+        price:`254`,
         img:`/images/Assets/product_23.png`
     },
     {

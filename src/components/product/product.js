@@ -4,9 +4,14 @@ import { FiShoppingCart } from "react-icons/fi";
 import { FaRegEye } from "react-icons/fa6";
 import { CiHeart } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
+import { useAuth0 } from "@auth0/auth0-react";
+
 import "./product.css";
 
-const Product = ({ detail, view, close, setclose }) => {
+const Product = ({ detail, view, close, setclose, addtocart }) => {
+
+  const { loginWithRedirect, isAuthenticated } = useAuth0();
+
   const [products, setProducts] = useState(Productdetail);
 
   const filterProducts = (productCategory) => {
@@ -31,14 +36,14 @@ const Product = ({ detail, view, close, setclose }) => {
             </button>
             {detail.map((x) => {
               return (
-                <div className="productbox">
+                <div className="productdetailbox">
                   <div className="productimagebox">
                     <img src={x.img} alt={x.Title}></img>
                   </div>
                   <div className="detailproject">
                     <h4>{x.cat}</h4>
                     <h3>{x.Title}</h3>
-                    <h3>{x.price}</h3>
+                    <h3>${x.price}</h3>
                     <button>Add to cart</button>
                   </div>
                 </div>
@@ -73,9 +78,17 @@ const Product = ({ detail, view, close, setclose }) => {
                       <div className="img_box">
                         <img src={product.img} alt={product.Title}></img>
                         <div className="icon">
-                          <li>
+                          {
+                            isAuthenticated ?
+                            <li onClick={() => addtocart(product)}>
                             <FiShoppingCart />
                           </li>
+                          :
+                          <li onClick={() => loginWithRedirect()}>
+                            <FiShoppingCart />
+                          </li>
+                          }
+
                           <li onClick={() => view(product)}>
                             <FaRegEye />
                           </li>
@@ -87,7 +100,7 @@ const Product = ({ detail, view, close, setclose }) => {
                       <div className="details">
                         <p>{product.cat}</p>
                         <h3>{product.Title}</h3>
-                        <h4>{product.price}</h4>
+                        <h4>${product.price}</h4>
                       </div>
                     </div>
                   </>
