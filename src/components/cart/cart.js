@@ -2,6 +2,7 @@ import React from "react";
 import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import "./cart.css";
+import axios from 'axios';
 
 const Cart = ({ cart, setcart }) => {
     const incqty = (product) => {
@@ -41,6 +42,18 @@ const Cart = ({ cart, setcart }) => {
       };
 
       const totalprice = cart.reduce((price , item) => price + item.qty * item.price, 0)
+
+      const handleSubmit = async(e) => {
+        e.preventDefault();
+    
+        let res = await axios.post('http://localhost:8004/payment',{
+          totalprice:totalprice,
+        });
+        if(res && res.data){
+          let link = res.data.links[1].href;
+          window.location.href = link;
+        }
+      } 
   return (
     <>
       <div className="cartcontainer">
@@ -81,7 +94,7 @@ const Cart = ({ cart, setcart }) => {
             cart.length>0  && 
             <>
             <h2 className="totalprice">${totalprice}</h2>
-            <button className="checkout">checkout</button>
+            <button className="checkout" onClick={handleSubmit}>checkout</button>
             </>
         }
       </div>
