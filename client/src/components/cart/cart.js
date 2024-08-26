@@ -46,7 +46,7 @@ const Cart = ({ cart, setcart }) => {
       const handleSubmit = async(e) => {
         e.preventDefault();
     
-        let res = await axios.post('http://localhost:8004/payment',{
+        let res = await axios.post('https://paypal-v2bn.onrender.com/payment',{
           totalprice:totalprice,
         });
         if(res && res.data){
